@@ -1,4 +1,4 @@
 newssup
 =======
 
-Android application for current news update. Allows listening and reading of the news.
+newssup is an Android application which gives the user current news updates. It provides user with an option of reading as well as listening the news.
