@@ -51,7 +51,10 @@ public class NewsCategory extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {        
          newsitem = new ArrayList<NewsItem>();
-     
+         //added to resolve SuperNotCalledException issue
+        	super.onCreate(savedInstanceState);
+           	setContentView(R.layout.categorymenu);
+
         //extracting parameter passed from NewsMenu screen
         Intent i = getIntent();
         Bundle b = i.getExtras();
