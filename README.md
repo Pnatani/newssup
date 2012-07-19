@@ -13,4 +13,4 @@ https://github.com/Pnatani/newssup
 
 *References:
 http://www.ibm.com/developerworks/xml/tutorials/x-androidrss/section3.html
-This tutorial introduces XML handling on the Android platform. It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform. When you're done
+This tutorial introduces XML handling on the Android platform. It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
