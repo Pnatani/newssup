@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+*
+* newssup - is an open source Android application which collates news updates from various sources at a common place.
+* The application provides a list of RSS feed providers to the user, e.g. Google News, Yahoo News etc. User can select the provider of his choice. The user is given an option of choosing various sections like  Top-Stories, World News etc under every RSS feed provider to see the news headlines.
+* 
+* Application written in Java.
+* Application user Google News API currently.
+*
+* Following is the link for the repository: https://github.com/Pnatani/newssup
+* 
+* Written by Pratibha Natani <pnatani@pdx.edu>
+* 
+* References:
+* http://www.ibm.com/developerworks/xml/tutorials/x-androidrss/.html
+* This tutorial introduces XML handling on the Android platform. 
+* It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
+*
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+     <TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#000000"/>
+    
+      <Button
+                android:id="@+id/button1"             
+     			android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+     			android:text="@string/Top_Stories"
+                android:textStyle="bold"
+                android:textSize="20dip"
+                android:padding="5dip"/>
+       <Button
+                android:id="@+id/button2"             
+     			android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+     			android:text="@string/World"
+                android:textStyle="bold"
+                android:textSize="20dip"
+                android:padding="5dip"/>
+</LinearLayout>
