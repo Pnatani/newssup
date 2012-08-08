@@ -17,7 +17,6 @@
 * It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
 *
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"

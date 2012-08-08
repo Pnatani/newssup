@@ -12,19 +12,15 @@
 * References:
 * http://www.ibm.com/developerworks/xml/tutorials/x-androidrss/.html
 * This tutorial introduces XML handling on the Android platform. 
-* It demonstrates you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
+* It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
 *
 */
-
-
 package com.update.newssup;
 
 import java.util.ArrayList;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import com.update.newssup.NewsItem;
 
 public class NewsParser extends DefaultHandler {
@@ -46,8 +42,11 @@ public class NewsParser extends DefaultHandler {
         @Override
         public void characters(char[] ch, int start, int length) throws SAXException {
             super.characters(ch, start, length);
-    
+            
+            if(isParsing && (elementName==newstags[0] ||elementName==newstags[1]||elementName==newstags[2]) && null != builder)
+            {
                     builder.append(ch,start,length);
+            }
         }
         
         @Override
@@ -81,7 +80,7 @@ public class NewsParser extends DefaultHandler {
                 else if(localName != TAG_ITEM)
                 {
                         if(isParsing)
-                        { 
+                        {
                         	 if (localName==newstags[0]) {currentitem.title = builder.toString();}
                         	 else if (localName==newstags[1]) {currentitem.link = builder.toString();}
                         	 else if (localName==newstags[2]) {currentitem.date = builder.toString();}

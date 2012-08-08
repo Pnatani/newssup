@@ -1,0 +1,90 @@
+<!--
+*
+* newssup - is an open source Android application which collates news updates from various sources at a common place.
+* The application provides a list of RSS feed providers to the user, e.g. Google News, Yahoo News etc. User can select the provider of his choice. The user is given an option of choosing various sections like  Top-Stories, World News etc under every RSS feed provider to see the news headlines.
+* 
+* Application written in Java.
+* Application user Google News API currently.
+*
+* Following is the link for the repository: https://github.com/Pnatani/newssup
+* 
+* Written by Pratibha Natani <pnatani@pdx.edu>
+* 
+* References:
+* http://www.ibm.com/developerworks/xml/tutorials/x-androidrss/.html
+* This tutorial introduces XML handling on the Android platform. 
+* It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
+*
+-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/image8" android:layout_height="fill_parent"
+    android:layout_width="fill_parent" 
+    android:orientation="horizontal">
+
+         <TextView
+	      android:id="@+id/Intro2"
+	      android:layout_marginTop="166dp"
+	      android:layout_marginLeft="59dp"
+		  android:gravity="center_vertical"
+	      android:layout_height="131dp"
+	      android:layout_width="206dp"
+	      android:shadowColor="#AAAAAA"
+	      android:background="#F5F5F5"
+	      />
+         
+        <TextView
+	      android:id="@+id/Intro1"
+	      android:layout_marginTop="168dp"
+	      android:layout_marginLeft="60dp"
+		  android:gravity="center_vertical"
+	      android:layout_height="128dp"
+	      android:layout_width="204dp"
+	      android:shadowColor="#AAAAAA"
+	      android:background="#0000FF"
+	      />
+   <TextView
+	      android:id="@+id/Intro"
+	      android:textColor="#030303"
+	      android:textSize="12dip"
+	      android:typeface="sans"
+	      android:textStyle="italic"	   
+	      android:layout_marginTop="172dp"
+	      android:layout_marginLeft="62dp"
+          android:padding="4dip"
+		  android:gravity="center_vertical"
+	      android:includeFontPadding="false"
+	      android:layout_height="120dp"
+	      android:layout_width="200dp"
+	      android:shadowColor="#AAAAAA"
+	      android:background="#5CACEE"
+	      />
+   		  
+ 	 <ImageButton
+    android:id="@+id/button1"
+    android:layout_marginTop="310dp"
+    android:layout_marginLeft="50dp"
+    android:layout_height="50dp"
+	android:layout_width="220dp"
+    android:src="@drawable/but12"
+    android:gravity="center"/> 
+ 
+ 	 <ImageButton
+    android:id="@+id/button2"
+    android:layout_marginTop="360dp"
+    android:layout_marginLeft="50dp"
+    android:layout_height="50dp"
+	android:layout_width="220dp"
+    android:src="@drawable/yahbut"
+    android:gravity="center"/> 
+
+       <ImageButton
+    android:id="@+id/button3"
+    android:layout_marginTop="410dp"
+    android:layout_marginLeft="50dp"
+    android:layout_height="50dp"
+	android:layout_width="220dp"
+    android:src="@drawable/cnnbut"
+    android:gravity="center"/> 
+  
+ 
+</RelativeLayout>  

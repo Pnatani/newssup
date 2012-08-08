@@ -17,19 +17,75 @@
 * It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
 *
 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
     
+ <!--    <Button
+                android:id="@+id/backbutton"             
+     			android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+     			android:text="@string/Back"
+                android:textStyle="bold"
+                android:textSize="20dip"
+                android:padding="5dip"/>
+    -->
+    
+    <ImageButton
+    android:id="@+id/backbutton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+ 	android:background="@null"
+    android:src="@drawable/backicon" /> 
+ 
+    <ImageButton
+    android:id="@+id/soundbutton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="60dp"
+ 	android:background="@null"
+    android:src="@drawable/volumeicon" />
+	
+    
+<!--     <ImageButton
+    android:id="@+id/resumebutton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="110dp"
+ 	android:background="@null"
+    android:src="@drawable/playicon" />   -->
+	
+    <ImageButton
+    android:id="@+id/stopbutton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="160dp"
+ 	android:background="@null"
+    android:src="@drawable/stopicon" />
+	
+ <!-- <ImageButton
+    android:id="@+id/pausebutton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="210dp"
+ 	android:background="@null"
+    android:src="@drawable/pauseicon" />  -->   
+
+     
     <TextView
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="#000000"/>
         
 	 <ListView 
+	     	android:layout_marginTop="70dp"
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content"
             android:id="@android:id/list"/>
-</LinearLayout>
+</RelativeLayout>

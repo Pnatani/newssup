@@ -15,8 +15,6 @@
 * It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
 *
 */
-
-
 package com.update.newssup;
 import android.app.Activity;
 import android.content.Intent;
