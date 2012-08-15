@@ -1,31 +1,46 @@
-/*
-* newssup - is an open source Android application which collates news updates from various sources at a common place.
-* The application provides a list of RSS feed providers to the user, e.g. Google News, Yahoo News etc. User can select the provider of his choice. The user is given an option of choosing various sections like  Top-Stories, World News etc under every RSS feed provider to see the news headlines.
-* 
-* Application written in Java.
-* Application user Google News API currently.
+/* 
+* “newssup”- Open Source Android application which shows news updates using 
+* Google and BBC News API. User can read as well as listen to the news.     
+*
+* Copyright (C) 2012  Pratibha Natani
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+* Please see the file “License” in this distribution for the license terms. Link is:
+* https://github.com/Pnatani/newssup/License
 *
 * Following is the link for the repository: https://github.com/Pnatani/newssup
 * 
 * Written by Pratibha Natani <pnatani@pdx.edu>
 * 
 * References:
-* http://www.ibm.com/developerworks/xml/tutorials/x-androidrss/.html
+* -Tutorial by IBM on building a mobile RSS Reader.
+* https://www.ibm.com/developerworks/xml/tutorials/x-androidrss/
 * This tutorial introduces XML handling on the Android platform. 
 * It demonstrates  you'll build out the important elements which are relevant to XML handling and rendering on the Android platform.
 *
+* -Taken inspiration from below link for implementing XMLParsing:
+* http://code.google.com/p/krvarma-android-samples/
+*
 */
+
 package com.update.newssup;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
@@ -38,7 +53,6 @@ import android.app.ListActivity;
 import android.view.LayoutInflater;
 import android.os.AsyncTask;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,82 +62,58 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import com.update.newssup.NewsItem;
 import com.update.newssup.NewsParser;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.OnInitListener;
-//added
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-//end
+
 
 public class NewsCategory extends ListActivity implements OnInitListener{
 
 		public String inputurl = null;
+		public String newsprovider = null;
         private ArrayList<NewsItem> newslist = null;
-        private ArrayList<NewsItem> speaktag = null;
         private NewsAdaptor newsadaptor = null;
         public NewsItem itemdata = null;
     	private TextToSpeech tts=null;
- //   	private Button soundbutton;
     	boolean tts_Active = false;
     	boolean on_Pause = false;
- //   	private Button stopbutton;
- //   	private Button backbutton;
- //   	private Button pausebutton;
- //   	private Button resumebutton;
    	    private int Position = 0;
    	    private ImageButton backbutton;
-   	    private ImageButton soundbutton;
+   	    private ImageButton playbutton;
    	    private ImageButton stopbutton;
-   	    private ImageButton pausebutton;
-   	 	private ImageButton resumebutton;
-   	 	
-   	 
+   	    
     @Override
     public void onCreate(Bundle savedInstanceState) {        
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.categorymenu);
         newslist = new ArrayList<NewsItem>();
 
-       
+        
         //extracting parameter passed from NewsMenu screen
         Intent i = getIntent();
         Bundle b = i.getExtras();
         inputurl = b.getString("ARRIVING_FROM");
+        newsprovider = b.getString("NEWS_PROVIDER");
         
         tts = new TextToSpeech(this,
                 this  //TextToSpeech.OnInitListener
                 );
         
-     
-        soundbutton = (ImageButton) findViewById(R.id.soundbutton);    
-        soundbutton.setOnClickListener(new View.OnClickListener() {
+
+        TextView tv = (TextView)findViewById(R.id.newssource);  
+        tv.setText(newsprovider);
+        
+        playbutton = (ImageButton) findViewById(R.id.playbutton);    
+        playbutton.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-           /* 	// fill parceable and launch activity
-                Intent intent = new Intent().setClass(getBaseContext (), TextSpeech.class);
-                ArrayList <NewsItem> v_newslist = new ArrayList <NewsItem>();
-
-                //filling v_newslist list before passing it to another activity
-                for (int i = 0; i < newslist.size(); i++)
-                    v_newslist.add (newslist.get(i));
-
-                intent.putParcelableArrayListExtra ("passinglist", v_newslist);
-                startActivity(intent);
-            */
         	   tts_Active = true;
         	   Position=0;
-        	   speakout();
+        	   speech();
              }
         });  
         
         stopbutton = (ImageButton) findViewById(R.id.stopbutton);    
         stopbutton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-
-
         	   if (tts != null){
            		tts.stop();
-           	//	tts.shutdown(); //should i add it?
            		tts_Active = false;
        	   				}
               
@@ -135,48 +125,22 @@ public class NewsCategory extends ListActivity implements OnInitListener{
         backbutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	  if (tts != null){
-                 		tts.stop();
+            		  	tts.stop();
                  		tts_Active = false;
              	   				}
-                 	   Intent myIntent = new Intent(v.getContext(), NewsMenu.class);
-              	//   Intent it=new Intent(NewsMenu.this,NewsCategory.class);
-              	   startActivityForResult(myIntent, 0);
-              	   NewsCategory.this.finish();
+            	  if (newsprovider == "Google News")
+            	  	   { 
+            	  		 Intent myIntent = new Intent(v.getContext(), NewsMenuggl.class);
+            	  		 startActivityForResult(myIntent, 0);
+            	  		 }
+            	  else if (newsprovider == "BBC News")
+            		   { 
+            		  	 Intent myIntent1 = new Intent(v.getContext(), NewsMenubbc.class);
+            	  		 startActivityForResult(myIntent1, 0);
+            		   }
+     	  		 NewsCategory.this.finish();
             }
-        });
-        
-        
-        
-  /*      pausebutton = (ImageButton) findViewById(R.id.pausebutton);    
-        pausebutton.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-
-        	   if (tts != null){
-           		tts.stop();
-           		tts_Active = false;
-           		on_Pause = true;
-       	   				}
-             }
-        });
-        
-        resumebutton = (ImageButton) findViewById(R.id.resumebutton);    
-        resumebutton.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		
-        	if (on_Pause == true){
-        	   on_Pause = false;
-        	   for (int i = Position-1; i < newslist.size(); i++)
-               {
-           		NewsItem a = newslist.get(i);
-           		tts.speak(a.title, TextToSpeech.QUEUE_ADD, null);
-           		Position = Position+1;
-               }
-        	}
-        	   //speakout();
-           }
-        });*/
-     
-        
+        });	
         new ExtractFeed().execute();    
 
      }
@@ -186,17 +150,10 @@ public class NewsCategory extends ListActivity implements OnInitListener{
  
         if (status == TextToSpeech.SUCCESS) {
 	        	tts_Active = true;
-	         
-	        	/* int result = tts.setLanguage(Locale.US);
-	 
-	            if (result == TextToSpeech.LANG_MISSING_DATA
-	                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-	                Log.e("TTS", "This Language is not supported");
-	            } else */
 	        	{
-	                soundbutton.setEnabled(true);
+	                playbutton.setEnabled(true);
 	                Position=0;
-	                speakout();
+	                speech();
 	            }
 	 
         } 
@@ -206,16 +163,14 @@ public class NewsCategory extends ListActivity implements OnInitListener{
  
     }
  
-    private void speakout() {
+    private void speech() {
  
-//    	String[] str = null;
     	for (int i = 0; i < newslist.size(); i++)
         {
     		NewsItem a = newslist.get(i);
     		tts.speak(a.title, TextToSpeech.QUEUE_ADD, null);
     		Position = Position+1;
         }
-    	//should call shutdown?
     }
     
     
@@ -284,7 +239,6 @@ public class NewsCategory extends ListActivity implements OnInitListener{
                
                public View getView(int inpos, View inview, ViewGroup ingroup) {
                         View view = inview;
-                   //commented      NewsItem itemdata = listitem.get(inpos);
                         itemdata = listitem.get(inpos);
                         if(view == null)
                         {
@@ -304,5 +258,22 @@ public class NewsCategory extends ListActivity implements OnInitListener{
                         return view;
                 } 
     }
-    
+   
+   
 }
+
+/*
+*  Reference details:
+*  
+* 1) https://www.ibm.com/developerworks/xml/tutorials/x-androidrss/
+* This tutorial introduces XML handling on the Android platform. 
+* This tutorial is explains following sections:
+* RSS basics
+* Android RSS reader application architecture
+* Fetching and parsing XML data with SAX
+* Rendering RSS data in Android
+* 
+* 2) http://code.google.com/p/krvarma-android-samples/
+* This site has various sample Android applications which have helped me in coding
+* in Android, including RSS Parsing. 
+*/
