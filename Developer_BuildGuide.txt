@@ -1,5 +1,5 @@
 /* 
-* “newssup”- Open Source Android application which shows news updates using 
+* ï¿½newssupï¿½- Open Source Android application which shows news updates using 
 * Google and BBC News API. User can read as well as listen to the news.     
 *
 * Copyright (C) 2012  Pratibha Natani
@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
-* Please see the file “License” in this distribution for the license terms. Link is:
+* Please see the file ï¿½Licenseï¿½ in this distribution for the license terms. Link is:
 * https://github.com/Pnatani/newssup/blob/master/LICENSE.odt
 *
 * Following is the link for the repository: https://github.com/Pnatani/newssup
@@ -76,7 +76,7 @@ Instructions to build the application:
    File-> Import-> Android-> Existing Android code into workspace
    Select the root directory to be the project folder and tick "Copy projects into workspace". Next. Finish.
 
-9. Click on Run to run the application as Android application.
+8. Click on Run to run the application as Android application.
 
 
 
